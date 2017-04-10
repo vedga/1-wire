@@ -5,10 +5,13 @@
 
 #include <vos/kernel.h>
 
-int c;
+static void indicateError();
+static int waitComplete();
     
 int main( void )
 {
+    int c;
+    
     initBoard();
   
 //  setSysClkSource(CLK_SOURCE_LSI, 0); //OK
@@ -22,83 +25,180 @@ int main( void )
   
     ledGreenOn();
 
-#if 1
+    /* Overdrive presence detection */
     drvOneWireReset(1);
+    if((c = waitComplete()) == ONEWIRE_STATUS_ERROR) {
+        /* No overdrive-compatible devices, check normal presence pulse */
+        drvOneWireReset(0);
+        if((c = waitComplete()) == ONEWIRE_STATUS_ERROR) {
+            /* No presence pulse detected */
+            indicateError();
+        }
+    }
   
-    while(ONEWIRE_STATUS_PROGRESS == (c = drvOneWireStatus())) {
-        vosIdle();
+    drvOneWireTxBits(0x00, 1);
+    if((c = waitComplete()) == ONEWIRE_STATUS_ERROR) {
+        indicateError();
     }
-    
-    drvOneWireReset(0);
-
-    while(ONEWIRE_STATUS_PROGRESS == (c = drvOneWireStatus())) {
-        vosIdle();
-    }
-#else
-    drv_onewire_context.presence = 1;
-    drv_onewire_context.overdrive = 0;
-#endif    
-    
-    drvOneWireActivePullupOn();
-//    drvOneWireActivePullupOff();
-//    drvOneWireActivePullupOn();
-//    drvOneWireActivePullupOff();
-
-    drvOneWireTxBits(0xFE, 2);
-//    drvOneWireTxBits(0xF1, 2);
-//    drvOneWireTxBits(0xAA, 8); // == 170
-//    drvOneWireTxBits(0xF0, 8); 
-//    drvOneWireTxBits(0x0F, 8); 
-//    drvOneWireTxBits(0xFF, 1); 
-//    drvOneWireTxBits(0x00, 1); 
-    
-    while(ONEWIRE_STATUS_PROGRESS == (c = drvOneWireStatus())) {
-        vosIdle();
+    if(((c = drvOneWireRxBits(1)) < 0) || (c != 0)) {
+        indicateError();
     }
 
-    // c must be ONEWIRE_STATUS_ERROR if compiled with Active-pullup,
-    // else c must be ONEWIRE_STATUS_COMPLETE.
+    drvOneWireTxBits(0x01, 1);
+    if((c = waitComplete()) == ONEWIRE_STATUS_ERROR) {
+        indicateError();
+    }
+    if(((c = drvOneWireRxBits(1)) < 0) || (c != 1)) {
+        indicateError();
+    }
     
-    drvOneWireActivePullupOff();
-
-    drvOneWireTxBits(0xFE, 2);
-    
-    while(ONEWIRE_STATUS_PROGRESS == (c = drvOneWireStatus())) {
-        vosIdle();
+    drvOneWireTxBits(0x02, 2);
+    if((c = waitComplete()) == ONEWIRE_STATUS_ERROR) {
+        indicateError();
+    }
+    if(((c = drvOneWireRxBits(2)) < 0) || (c != 0x02)) {
+        indicateError();
     }
 
-    // c must be ONEWIRE_STATUS_COMPLETE.
-    
-    c = drvOneWireRxBits(2);
-    
-    // c must be (0xFE & 0x03) == 0x03
-    
-//    c = drvOneWireRxBits(8);
-//    c = drvOneWireRxBits(1);
+    drvOneWireTxBits(0x01, 2);
+    if((c = waitComplete()) == ONEWIRE_STATUS_ERROR) {
+        indicateError();
+    }
+    if(((c = drvOneWireRxBits(2)) < 0) || (c != 0x01)) {
+        indicateError();
+    }
 
     drvOneWireTxBits(0xAA, 8);
-
-    while(ONEWIRE_STATUS_PROGRESS == (c = drvOneWireStatus())) {
-        vosIdle();
+    if((c = waitComplete()) == ONEWIRE_STATUS_ERROR) {
+        indicateError();
+    }
+    if(((c = drvOneWireRxBits(8)) < 0) || (c != 0xAA)) {
+        indicateError();
     }
 
-    // c must be ONEWIRE_STATUS_COMPLETE.
-    
-    c = drvOneWireRxBits(8);
-
-    // c must be 0xAA
-    
     drvOneWireTxBits(0x55, 8);
-
-    while(ONEWIRE_STATUS_PROGRESS == (c = drvOneWireStatus())) {
-        vosIdle();
+    if((c = waitComplete()) == ONEWIRE_STATUS_ERROR) {
+        indicateError();
+    }
+    if(((c = drvOneWireRxBits(8)) < 0) || (c != 0x55)) {
+        indicateError();
     }
 
-    // c must be ONEWIRE_STATUS_COMPLETE.
+    drvOneWireTxBits(0xF0, 8);
+    if((c = waitComplete()) == ONEWIRE_STATUS_ERROR) {
+        indicateError();
+    }
+    if(((c = drvOneWireRxBits(8)) < 0) || (c != 0xF0)) {
+        indicateError();
+    }
     
-    c = drvOneWireRxBits(8);
-  
-    // c must be 0x55
+    drvOneWireTxBits(0x0F, 8);
+    if((c = waitComplete()) == ONEWIRE_STATUS_ERROR) {
+        indicateError();
+    }
+    if(((c = drvOneWireRxBits(8)) < 0) || (c != 0x0F)) {
+        indicateError();
+    }
+
+    drvOneWireTxBits(0x00, 8);
+    if((c = waitComplete()) == ONEWIRE_STATUS_ERROR) {
+        indicateError();
+    }
+    if(((c = drvOneWireRxBits(8)) < 0) || (c != 0x00)) {
+        indicateError();
+    }
+
+    drvOneWireTxBits(0xFF, 8);
+    if((c = waitComplete()) == ONEWIRE_STATUS_ERROR) {
+        indicateError();
+    }
+    if(((c = drvOneWireRxBits(8)) < 0) || (c != 0xFF)) {
+        indicateError();
+    }
+    
+#if defined(__DRV_ONEWIRE_ACTIVE_PULLUP)
+    /* Active-pullup protection test */
+    drvOneWireActivePullupOn();
+    
+    /* Overdrive reset */
+    drvOneWireReset(1);
+    if((c = waitComplete()) != ONEWIRE_STATUS_ERROR) {
+        indicateError();
+    }
+    
+    /* Normal reset */
+    drvOneWireReset(0);
+    if((c = waitComplete()) != ONEWIRE_STATUS_ERROR) {
+        indicateError();
+    }
+    
+    /* Simulate PRESENCE detection */
+    drv_onewire_context.presence = 1;
+
+    drvOneWireTxBits(0x00, 1);
+    if((c = waitComplete()) != ONEWIRE_STATUS_ERROR) {
+        indicateError();
+    }
+
+    drvOneWireTxBits(0x01, 1);
+    if((c = waitComplete()) != ONEWIRE_STATUS_ERROR) {
+        indicateError();
+    }
+    
+    drvOneWireTxBits(0x02, 2);
+    if((c = waitComplete()) != ONEWIRE_STATUS_ERROR) {
+        indicateError();
+    }
+
+    drvOneWireTxBits(0x01, 2);
+    if((c = waitComplete()) != ONEWIRE_STATUS_ERROR) {
+        indicateError();
+    }
+    
+    drvOneWireActivePullupOff();
+    
+    /* Overdrive presence detection */
+    drvOneWireReset(1);
+    if((c = waitComplete()) == ONEWIRE_STATUS_ERROR) {
+        /* No overdrive-compatible devices, check normal presence pulse */
+        drvOneWireReset(0);
+        if((c = waitComplete()) == ONEWIRE_STATUS_ERROR) {
+            /* No presence pulse detected */
+            indicateError();
+        }
+    }
+#endif /* defined(__DRV_ONEWIRE_ACTIVE_PULLUP) */    
+    
+    /* Green and blue leds ON - all tests successfuly complete */
+    ledBlueOn();
+
+    while(1) {
+        waitComplete();
+    }
     
     return 0;
 }
+
+static void indicateError() {
+    /* Assert pullup OFF */
+    drvOneWireActivePullupOff();
+    
+    /* Green led OFF, blue led ON - indicate error */
+    ledGreenOff();
+    ledBlueOn();
+    
+    while(1) {
+        waitComplete();
+    }
+}
+
+static int waitComplete() {
+    int c;
+    
+    while(ONEWIRE_STATUS_PROGRESS == (c = drvOneWireStatus())) {
+        vosIdle();
+    }
+    
+    return c;
+}
+

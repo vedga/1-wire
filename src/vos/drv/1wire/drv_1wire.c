@@ -524,7 +524,7 @@ __interrupt void isrOneWirePwmCapture(void) {
                 resOneWireSetCapturePolarity(ONEWIRE_CAPTURE_POLARITY);
 
                 /* Delay after RESET and start PRESENCE pulse */
-                uint16_t delay = value - resOneWireTimerGetPwmLevel();
+                uint16_t delay = value - RESET_DURATION();
                 
                 /* Check presence pulse front delay */
                 if((delay < PRESENCE_MIN_DELAY()) || 

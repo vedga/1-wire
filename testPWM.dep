@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<project>
+  <fileVersion>2</fileVersion>
+  <fileChecksum>2196660139</fileChecksum>
+  <configuration>
+    <name>Debug</name>
+    <outputs>
+      <file>$PROJ_DIR$\Debug\Obj\drv_1wire.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\kernel.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.o</file>
+      <file>$PROJ_DIR$\Debug\Exe\testPWM.out</file>
+      <file>$TOOLKIT_DIR$\inc\c\ycheck.h</file>
+      <file>$PROJ_DIR$\inc\vos\drv\onewire.h</file>
+      <file>$TOOLKIT_DIR$\lib\dlstm8smn.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\drv_clk.__cstat.et</file>
+      <file>$TOOLKIT_DIR$\inc\c\ysizet.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\c\string.h</file>
+      <file>$PROJ_DIR$\drv_clk.c</file>
+      <file>$PROJ_DIR$\src\vos\kernel\stm8\kernel.c</file>
+      <file>$PROJ_DIR$\main.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\drv_clk.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\drv_1wire.o</file>
+      <file>$PROJ_DIR$\src\vos\drv\1wire\drv_1wire.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\testPWM.pbd</file>
+      <file>$PROJ_DIR$\Debug\Obj\kernel.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\drv_clk.o</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Product.h</file>
+      <file>$PROJ_DIR$\inc\res\stm8\res_chip.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdbool.h</file>
+      <file>$TOOLKIT_DIR$\inc\io_macros.h</file>
+      <file>$PROJ_DIR$\inc\bit\platform.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdint.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Threads.h</file>
+      <file>$TOOLKIT_DIR$\inc\iostm8l152c6.h</file>
+      <file>$PROJ_DIR$\src\vos\drv\1wire\drv_1wire.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\intrinsics.h</file>
+      <file>$PROJ_DIR$\inc\res\stm8\res_1wire.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\xencoding_limits.h</file>
+      <file>$PROJ_DIR$\board.h</file>
+      <file>$TOOLKIT_DIR$\lib\dbgstm8smd.a</file>
+      <file>$TOOLKIT_DIR$\config\lnkstm8l152c6.icf</file>
+      <file>$PROJ_DIR$\Debug\Obj\drv_1wire.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.__cstat.et</file>
+      <file>$PROJ_DIR$\inc\res\stm8\res_dma.h</file>
+      <file>$PROJ_DIR$\src\vos\drv\1wire\timing.h</file>
+      <file>$PROJ_DIR$\Debug\List\testPWM.map</file>
+      <file>$PROJ_DIR$\inc\vos\kernel.h</file>
+      <file>$TOOLKIT_DIR$\lib\dlstm8smn.a</file>
+      <file>$PROJ_DIR$\Debug\Obj\kernel.__cstat.et</file>
+    </outputs>
+    <file>
+      <name>$PROJ_DIR$\Debug\Exe\testPWM.out</name>
+      <outputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 41</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 36 16 20 1 2 43 35</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>[ROOT_NODE]</name>
+      <outputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 3 41</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\drv_clk.c</name>
+      <outputs>
+        <tool>
+          <name>__cstat</name>
+          <file> 7</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 20</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 14</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 34 25 26 4 27 15 6 21 33 28 23 31 29 24 22</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 27 21 4 25 26 29 15 6 24 22 23 31 33 28 34</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\src\vos\kernel\stm8\kernel.c</name>
+      <outputs>
+        <tool>
+          <name>__cstat</name>
+          <file> 44</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 1</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 19</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 42 25 26 4 27 15 6 21 33 28 23 31 29 24</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 4 29 33 27 26 25 28 23 31 15 6 21 24 42</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\main.c</name>
+      <outputs>
+        <tool>
+          <name>__cstat</name>
+          <file> 38</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 2</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 9</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 10 4 27 15 6 21 33 28 8 34 25 26 23 31 29 24 22 5 42</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 4 27 21 15 6 25 26 29 34 8 33 28 22 23 31 24 10 5 42</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\src\vos\drv\1wire\drv_1wire.c</name>
+      <outputs>
+        <tool>
+          <name>__cstat</name>
+          <file> 37</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 16</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 0</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 30 5 25 26 4 27 15 6 21 33 28 23 31 29 24 40 42 32 22 39</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 27 40 21 4 32 26 29 15 6 24 42 5 25 23 31 33 28 30 22 39</file>
+        </tool>
+      </inputs>
+    </file>
+  </configuration>
+  <configuration>
+    <name>Release</name>
+    <outputs/>
+    <forcedrebuild>
+      <name>[MULTI_TOOL]</name>
+      <tool>ILINK</tool>
+    </forcedrebuild>
+  </configuration>
+</project>
+
+
