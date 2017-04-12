@@ -1601,6 +1601,12 @@
   <file>
     <name>$PROJ_DIR$\main.c</name>
   </file>
+  <file>
+    <name>$PROJ_DIR$\src\vos\mod\1wire\mod_1wire.c</name>
+  </file>
+  <file>
+    <name>$PROJ_DIR$\src\vos\mod\1wire\mod_1wire_search.c</name>
+  </file>
 </project>
 
 

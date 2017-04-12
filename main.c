@@ -9,7 +9,10 @@
 static void indicateError();
 static int waitComplete();
     
+//#define HIGH_LEVEL
+
 pt_onewire_search_context_t ptSearchContext;
+struct pt nested;
 
 int main( void )
 {
@@ -28,27 +31,22 @@ int main( void )
   
     ledGreenOn();
 
-#if 0
-#if 1
+#if defined(HIGH_LEVEL)
     PT_INIT(&ptSearchContext.pt);
     
-    while(PT_SCHEDULE(c = ptOneWireProbeBus(&ptSearchContext.pt))) {
+    while(PT_SCHEDULE(c = ptOneWireProbeBus(&ptSearchContext.pt, &nested))) {
         if(PT_WAITING == c) {
             /* Operation in progress */
             waitComplete();
             
             continue;
         }
-        
-        /* Got next result */
-        __no_operation();
     }
     
-#else
-    drv_onewire_context.overdrive = 0;
-#endif    
+    /* Initialize search context for first call */
     ptOneWireInitWalkROM(&ptSearchContext);
     
+    /* Schedule search procedure */
     while(PT_SCHEDULE(c = ptOneWireWalkROM(&ptSearchContext))) {
         if(PT_WAITING == c) {
             /* Operation in progress */
@@ -57,10 +55,13 @@ int main( void )
             continue;
         }
         
-        /* Got next result */
+        /* Found next device at the 1-Wire bus.
+         * Device's S/N located at ptSearchContext.romid
+         */
         __no_operation();
     }
     
+    /* No more devices on the bus */
     __no_operation();
 #else    
     /* Overdrive presence detection */
