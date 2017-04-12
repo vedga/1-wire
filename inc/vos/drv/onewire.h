@@ -40,6 +40,12 @@ typedef struct {
     volatile uint8_t presence:1;
     /* Operation status */
     volatile uint8_t status:2;
+    
+    /* Next fields is not used on hardware-related primitives. It's used
+    at high-level protocol functions. */
+    
+    /* Some device(s) on bus use parasite power */
+    uint8_t parasite:1;
 } drv_onewire_context_t;
 
 #define ONEWIRE_STATUS_PROGRESS         0

@@ -12,7 +12,7 @@
           
           
           
-        <Column0>169</Column0><Column1>27</Column1><Column2>27</Column2><Column3>27</Column3></ColumnWidths>
+        <Column0>174</Column0><Column1>39</Column1><Column2>27</Column2><Column3>0</Column3></ColumnWidths>
       </Workspace>
       <DRIVER_CUSTOM_SFR>
         <PreferedWindows>
@@ -57,7 +57,7 @@
             <Factory>Workspace</Factory>
             <Session>
               
-            <NodeDict><ExpandedNode>testPWM</ExpandedNode><ExpandedNode>testPWM/drv_1wire.c</ExpandedNode><ExpandedNode>testPWM/main.c</ExpandedNode></NodeDict></Session>
+            <NodeDict><ExpandedNode>testPWM</ExpandedNode><ExpandedNode>testPWM/drv_1wire.c</ExpandedNode></NodeDict></Session>
           </Tab>
         </Tabs>
         
@@ -67,7 +67,7 @@
       
       
       
-    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\main.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>5</YPos2><SelStart2>209</SelStart2><SelEnd2>209</SelEnd2></Tab><ActiveTab>0</ActiveTab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
+    <Pane/><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
     <Positions>
       
       

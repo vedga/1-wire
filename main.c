@@ -2,12 +2,15 @@
 
 #include "board.h"
 #include <vos/drv/onewire.h>
+#include <vos/mod/mod_1wire.h>
 
 #include <vos/kernel.h>
 
 static void indicateError();
 static int waitComplete();
     
+pt_onewire_search_context_t ptSearchContext;
+
 int main( void )
 {
     int c;
@@ -25,6 +28,41 @@ int main( void )
   
     ledGreenOn();
 
+#if 0
+#if 1
+    PT_INIT(&ptSearchContext.pt);
+    
+    while(PT_SCHEDULE(c = ptOneWireProbeBus(&ptSearchContext.pt))) {
+        if(PT_WAITING == c) {
+            /* Operation in progress */
+            waitComplete();
+            
+            continue;
+        }
+        
+        /* Got next result */
+        __no_operation();
+    }
+    
+#else
+    drv_onewire_context.overdrive = 0;
+#endif    
+    ptOneWireInitWalkROM(&ptSearchContext);
+    
+    while(PT_SCHEDULE(c = ptOneWireWalkROM(&ptSearchContext))) {
+        if(PT_WAITING == c) {
+            /* Operation in progress */
+            waitComplete();
+            
+            continue;
+        }
+        
+        /* Got next result */
+        __no_operation();
+    }
+    
+    __no_operation();
+#else    
     /* Overdrive presence detection */
     drvOneWireReset(1);
     if((c = waitComplete()) == ONEWIRE_STATUS_ERROR) {
@@ -168,6 +206,8 @@ int main( void )
         }
     }
 #endif /* defined(__DRV_ONEWIRE_ACTIVE_PULLUP) */    
+    
+#endif    
     
     /* Green and blue leds ON - all tests successfuly complete */
     ledBlueOn();

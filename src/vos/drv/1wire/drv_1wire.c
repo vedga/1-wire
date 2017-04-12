@@ -11,6 +11,23 @@ __INLINE void drvOneWireKernelOperationStart() {
 }
 
 __INLINE int16_t drvOneWireDecodeBit(drv_onewire_duration_t _duration) {
+#if 1
+    if(OVERDRIVE) {
+        if((_duration < OVERDRIVE_BIT1_MIN_DURATION) || 
+           (_duration > OVERDRIVE_BIT0_MAX_DURATION)) {
+            return -1;
+        }
+        
+        return (_duration < OVERDRIVE_BIT1_MAX_DURATION) ? 0x80 : 0;
+    } else {
+        if((_duration < NORMAL_BIT1_MIN_DURATION) || 
+           (_duration > NORMAL_BIT0_MAX_DURATION)) {
+            return -1;
+        }
+        
+        return (_duration < NORMAL_BIT1_MAX_DURATION) ? 0x80 : 0;
+    }
+#else    
     if(OVERDRIVE) {
         if(_duration < OVERDRIVE_BIT1_MIN_DURATION) {
             /* Duration less than min */
@@ -46,6 +63,7 @@ __INLINE int16_t drvOneWireDecodeBit(drv_onewire_duration_t _duration) {
             return -1;
         }
     }
+#endif
 }
 
 #if !defined(__DRV_ONEWIRE_DMA)

@@ -38,7 +38,7 @@ ShowSource=1
 [Simulator]
 Freq=16000000
 [DebugChecksum]
-Checksum=1699060678
+Checksum=-1658291298
 [CallStack]
 ShowArgs=0
 [Disassembly]
@@ -69,7 +69,8 @@ LoggingEnabled=_ 0
 LogFile=_ ""
 [Breakpoints]
 Bp0=_ "STD_CODE" "0x008A4B" 0 0 0 0 "" 0 ""
-Count=1
+Bp1=_ "STD_CODE" "{$PROJ_DIR$\inc\pt\pt.h}.1.1" 0 0 0 0 "" 0 ""
+Count=2
 [Aliases]
 A0=_ "C:\Documents and Settings\monster\Мои документы\IAR\drv_1wire.c" ""
 A1=_ "C:\Documents and Settings\monster\Мои документы\IAR\drv_1wire.h" ""

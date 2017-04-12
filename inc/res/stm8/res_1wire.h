@@ -283,7 +283,7 @@ __INLINE void resOneWireTimerAttachCapture() {
     //TIM3_CCMR2_CC2S = 1;
   
     /* CH2 input, IC2 mapped to TI2FP2, no capture filters and prescaler */
-    TIM3_CCMR2 = 1;
+    TIM3_CCMR2 = 1 /*| (0x01 << 4)*/;
   
     /* Capture filter: Fsampling = Fsysclk, N = 8 */
 //  TIM3_CCMR2 = (TIM3_CCMR2 & 0x0F) | (0x03 << 4);
