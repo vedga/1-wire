@@ -20,3 +20,11 @@ ONEWIRE_PWM_IDLE_POLARITY - active polarity for output signal modulation (0 mean
 ONEWIRE_CAPTURE_POLARITY - active polarity for input signal (0 mean low level on 1-wire bus is active; 1 mean high level on 1-wire bus is active).
 
 ONEWIRE_ACTIVE_PULLUP_POLARITY - Active-Pullup polarity (0 mean low level on device pin when Active-Pullup is ON; 1 mean high level on device pin when Active-Pullup is ON).
+
+Also this project contain some high-level procedures, base on protothreads library:
+
+PT_THREAD(ptOneWireProbeBus(struct pt * _pt, struct pt * _nested))
+Probe the 1-wire bus, determine it capabilities and power requirements.
+
+PT_THREAD(ptOneWireWalkROM(pt_onewire_search_context_t * _ctx))
+Enumerate devices connected to the 1-Wire bus.
